@@ -20,23 +20,23 @@ do
 
     if (command == 1)
     {
-        Console.WriteLine("Not Impliment Create phone book");
+        Console.WriteLine("Create phone book, Not Implemented");
     }
     if(command == 2)
     {
-        Console.WriteLine("Not Impliment Update phone book");
+        Console.WriteLine("Update phone book, Not Implemented");
     }
     if (command == 3)
     {
-        Console.WriteLine("Not Impliment Delete one phone book");
+        Console.WriteLine("Delet one phone book, Not Implemented");
     }
     if (command == 4)
     {
-        Console.WriteLine("Not Impliment Read all phone book");
+        Console.WriteLine("Read all phone book, Not Implemented");
     }
     if (command == 5)
     {
-        Console.WriteLine("Not Impliment Read one phone book");
+        Console.WriteLine("Read one phone book, Not Implemented");
     }
 
     Console.Write("Is your cantinue(yes / no): ");
@@ -46,5 +46,4 @@ do
     {
         isCantinue = false;
     }
-
 } while (isCantinue);
