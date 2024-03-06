@@ -44,7 +44,7 @@ do
     }
     if (command == 4)
     {
-        Console.WriteLine("Read all phone book, Not Implemented");
+        contactService.SowContacts();
     }
     if (command == 5)
     {

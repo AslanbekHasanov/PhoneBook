@@ -9,6 +9,7 @@ namespace PhoneBook.Services.Contacts
 {
     internal interface IContactService
     {
-        Contact AddContact(Contact contact); 
+        Contact AddContact(Contact contact);
+        void SowContacts();
     }
 }
