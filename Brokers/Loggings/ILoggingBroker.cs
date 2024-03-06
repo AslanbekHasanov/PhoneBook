@@ -1,4 +1,6 @@
-﻿namespace PhoneBook.Brokers.Loggings
+﻿using System;
+
+namespace PhoneBook.Brokers.Loggings
 {
     internal interface ILoggingBroker
     {

@@ -2,6 +2,10 @@
 // Copyright (c) Coalition of the Good-Hearted Engineers
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
+using PhoneBook.Brokers.Storages;
+using PhoneBook.Models;
+using PhoneBook.Services.Contacts;
+using System;
 
 bool isCantinue = true;
 
@@ -17,10 +21,18 @@ do
 
     Console.Write("Enter your command(1,2,3...): ");
     int command = Convert.ToInt32(Console.ReadLine());
+    IContactService contactService = new ContactService();
 
     if (command == 1)
     {
-        Console.WriteLine("Create phone book, Not Implemented");
+        Contact contact = new Contact();
+        Console.Write("Enter your id: ");
+        contact.Id = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter your name: ");
+        contact.Name = Console.ReadLine();
+        Console.Write("Enter your phone: ");
+        contact.Phone = Console.ReadLine();
+        contactService.AddContact(contact);
     }
     if(command == 2)
     {
