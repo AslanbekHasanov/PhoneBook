@@ -24,6 +24,29 @@ namespace PhoneBook.Brokers.Storages
             return contact;
         }
 
+        public Contact[] ReadAllContacts()
+        {
+            string[] contactLines = File.ReadAllLines(FilePath);
+
+            Contact[] contacts = new Contact[contactLines.Length];
+            for(int itaration = 0; itaration  < contactLines.Length; itaration++)
+            {
+                string contactLine = contactLines[itaration];
+                string[] contactProperties = contactLine.Split('*');
+
+                Contact contact = new Contact()
+                {
+                    Id = Convert.ToInt32(contactProperties[0]),
+                    Name = contactProperties[1],
+                    Phone = contactProperties[2]
+                };
+
+                contacts[itaration] = contact;
+            }
+
+            return contacts;
+        }
+
         private void EnsureFileExists()
         {
             bool fileExists = File.Exists(FilePath);

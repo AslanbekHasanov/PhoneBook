@@ -21,6 +21,18 @@ namespace PhoneBook.Services.Contacts
 
         public Contact AddContact(Contact contact) =>
             storageBroker.AddContact(contact);
+
+        public void SowContacts()
+        {
+            Contact[] contacts = this.storageBroker.ReadAllContacts();
+
+            foreach (Contact contact in contacts)
+            {
+                this.loggingBroker.LogInformation($"{contact.Id}. {contact.Name} - {contact.Phone}");
+            }
+
+            this.loggingBroker.LogInformation($"=== End of contacts ===");
+        }
     }
 
 }
