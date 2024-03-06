@@ -24,6 +24,24 @@ namespace PhoneBook.Brokers.Storages
             return contact;
         }
 
+        public bool DeleteContact(string phone)
+        {
+            string[] contactLines = File.ReadAllLines(FilePath);
+
+            for (int itaration = 0; itaration < contactLines.Length; itaration++)
+            {
+                string contactLine = contactLines[itaration];
+                string[] contactProperties = contactLine.Split('*');
+
+                if (contactProperties[2].Contains(phone))
+                {
+                    contactLines[itaration] = "";
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public Contact[] ReadAllContacts()
         {
             string[] contactLines = File.ReadAllLines(FilePath);
