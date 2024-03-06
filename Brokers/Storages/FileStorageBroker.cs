@@ -67,6 +67,25 @@ namespace PhoneBook.Brokers.Storages
             return contacts;
         }
 
+        public bool UpdateContact(Contact contact)
+        {
+            string[] contactLines = File.ReadAllLines(FilePath);
+
+            for (int itaration = 0; itaration < contactLines.Length; itaration++)
+            {
+                string contactLine = contactLines[itaration];
+                string[] contactProperties = contactLine.Split('*');
+
+                if (contactProperties[0].Contains(contact.Id.ToString()))
+                {
+                    contactProperties[1] = contact.Name;
+                    contactProperties[2] = contact.Phone;
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void EnsureFileExists()
         {
             bool fileExists = File.Exists(FilePath);

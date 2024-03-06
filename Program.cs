@@ -36,7 +36,18 @@ do
     }
     if(command == 2)
     {
-        Console.WriteLine("Update phone book, Not Implemented");
+        Contact contact = new Contact();
+        Console.Write("Enter your id: ");
+        contact.Id = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Enter your name: ");
+        contact.Name = Console.ReadLine();
+        Console.Write("Enter your phone: ");
+        contact.Phone = Console.ReadLine();
+        bool isUpdate = contactService.UpdateContact(contact);
+        if (isUpdate)
+        {
+            Console.WriteLine("Yangilandi");
+        }
     }
     if (command == 3)
     {
