@@ -22,6 +22,12 @@ namespace PhoneBook.Services.Contacts
         public Contact AddContact(Contact contact) =>
             storageBroker.AddContact(contact);
 
+        public bool DeleteContact(string phone)
+        {
+            bool isDeleted = this.storageBroker.DeleteContact(phone);
+            return isDeleted;
+        }
+
         public void SowContacts()
         {
             Contact[] contacts = this.storageBroker.ReadAllContacts();
@@ -32,6 +38,11 @@ namespace PhoneBook.Services.Contacts
             }
 
             this.loggingBroker.LogInformation($"=== End of contacts ===");
+        }
+
+        public bool UpdateContact(Contact contact)
+        {
+            throw new NotImplementedException();
         }
     }
 
