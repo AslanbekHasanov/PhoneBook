@@ -85,6 +85,11 @@ namespace PhoneBook.Services.Contacts
             this.loggingBroker.LogError("Contact is invalid.");
             return false;
         }
+
+        public bool UpdateContact(Contact contact)
+        {
+            return this.storageBroker.UpdateContact(contact);
+        }
     }
 
 }
