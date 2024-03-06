@@ -40,7 +40,18 @@ do
     }
     if (command == 3)
     {
-        Console.WriteLine("Delet one phone book, Not Implemented");
+        Console.Write("Enter your phone(f: (122-2222-222)): ");
+        string phone = Console.ReadLine();
+        bool res = contactService.DeleteContact(phone);
+        if (res)
+        {
+            Console.WriteLine("uchdi");
+
+        }
+        else
+        {
+            Console.WriteLine("uchmadi");
+        }
     }
     if (command == 4)
     {

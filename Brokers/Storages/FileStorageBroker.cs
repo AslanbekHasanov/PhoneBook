@@ -35,7 +35,9 @@ namespace PhoneBook.Brokers.Storages
 
                 if (contactProperties[2].Contains(phone))
                 {
-                    contactLines[itaration] = "";
+                    contactProperties[0] = string.Empty;
+                    contactProperties[1] = string.Empty;
+                    contactProperties[2] = string.Empty;
                     return true;
                 }
             }
