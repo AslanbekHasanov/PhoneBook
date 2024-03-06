@@ -13,14 +13,19 @@ namespace PhoneBook.Services.Contacts
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
+
         public ContactService()
         {
             this.storageBroker = new FileStorageBroker();
             this.loggingBroker = new LoggingBroker();
         }
 
-        public Contact AddContact(Contact contact) =>
-            storageBroker.AddContact(contact);
+        public Contact AddContact(Contact contact)
+        {
+            return contact is null
+                ? CreateAndLogInvalidContact() 
+                : ValidateAndAddContact(contact);
+        }
 
         public void SowContacts()
         {
@@ -32,6 +37,27 @@ namespace PhoneBook.Services.Contacts
             }
 
             this.loggingBroker.LogInformation($"=== End of contacts ===");
+        }
+
+        private Contact CreateAndLogInvalidContact()
+        {
+            this.loggingBroker.LogError("Contact is invaled");
+            return new Contact();
+        }
+
+        private Contact ValidateAndAddContact(Contact contact)
+        {
+            if (contact.Id is 0 
+                || String.IsNullOrWhiteSpace(contact.Name)
+                || String.IsNullOrWhiteSpace(contact.Phone))
+            {
+                this.loggingBroker.LogError("Contact details missing.");
+                return new Contact();
+            }
+            else
+            {
+                return this.storageBroker.AddContact(contact);
+            }
         }
     }
 
