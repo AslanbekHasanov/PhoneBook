@@ -11,6 +11,8 @@ bool isCantinue = true;
 
 do
 {
+    IContactService contactService = new ContactService();
+
     Console.Clear();
     Console.WriteLine("Welcome to, Phone Book");
     Console.WriteLine("1. Create phone book");
@@ -21,7 +23,6 @@ do
 
     Console.Write("Enter your command(1,2,3...): ");
     int command = Convert.ToInt32(Console.ReadLine());
-    IContactService contactService = new ContactService();
 
     if (command == 1)
     {
@@ -32,6 +33,7 @@ do
         contact.Name = Console.ReadLine();
         Console.Write("Enter your phone: ");
         contact.Phone = Console.ReadLine();
+
         contactService.AddContact(contact);
     }
     if(command == 2)
@@ -43,22 +45,15 @@ do
         contact.Name = Console.ReadLine();
         Console.Write("Enter your phone: ");
         contact.Phone = Console.ReadLine();
+
         contactService.UpdateContact(contact);
     }
     if (command == 3)
     {
         Console.Write("Enter your phone(f: (122-2222-222)): ");
         string phone = Console.ReadLine();
-        bool res = contactService.DeleteContact(phone);
 
-        if (res)
-        {
-            Console.WriteLine("Contact deleted");
-        }
-        else
-        {
-            Console.WriteLine("Contact was not deleted");
-        }
+        contactService.DeleteContact(phone);
     }
     if (command == 4)
     {
@@ -68,6 +63,7 @@ do
     {
         Console.Write("Enter yuor phone(i: 111-1111-111): ");
         string phone = Console.ReadLine();
+
         contactService.ReadContact(phone);
     }
 

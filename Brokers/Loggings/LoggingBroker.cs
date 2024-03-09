@@ -23,8 +23,6 @@ namespace PhoneBook.Brokers.Loggings
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(exception.Message);
             Console.ResetColor();
-        }
-
-        
+        }   
     }
 }
