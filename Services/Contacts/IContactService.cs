@@ -13,5 +13,6 @@ namespace PhoneBook.Services.Contacts
         void SowContacts();
         bool DeleteContact(string phone);
         bool UpdateContact(Contact contact);
+        Contact ReadContact(string phone);
     }
 }
