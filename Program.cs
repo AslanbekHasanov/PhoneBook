@@ -54,14 +54,14 @@ do
         Console.Write("Enter your phone(f: (122-2222-222)): ");
         string phone = Console.ReadLine();
         bool res = contactService.DeleteContact(phone);
+
         if (res)
         {
-            Console.WriteLine("uchdi");
-
+            Console.WriteLine("Contact deleted");
         }
         else
         {
-            Console.WriteLine("uchmadi");
+            Console.WriteLine("Contact was not deleted");
         }
     }
     if (command == 4)

@@ -11,8 +11,11 @@ namespace PhoneBook.Brokers.Storages
     internal class FileStorageBroker : IStorageBroker
     {
         private const string FilePath = "../../../Assets/Contacts.txt";
+        private bool isDelete;
+
         public FileStorageBroker() 
         {
+            isDelete = false;
             EnsureFileExists();
         }
 
@@ -35,11 +38,22 @@ namespace PhoneBook.Brokers.Storages
 
                 if (contactProperties[2].Contains(phone))
                 {
-                    contactProperties[0] = string.Empty;
-                    contactProperties[1] = string.Empty;
-                    contactProperties[2] = string.Empty;
-                    return true;
+                    isDelete = true;
+                    contactLines[itaration] = null;
+                    break;
                 }
+            }
+
+            if (IsDeleteFile() is true)
+            {
+                for (int itaration = 0; itaration < contactLines.Length; itaration++)
+                {
+                    if (contactLines[itaration] is not null)
+                    {
+                        File.AppendAllText(FilePath, $"{contactLines[itaration]}\n");
+                    }
+                }
+                return true;
             }
             return false;
         }
@@ -82,6 +96,17 @@ namespace PhoneBook.Brokers.Storages
                     contactProperties[2] = contact.Phone;
                     return true;
                 }
+            }
+            return false;
+        }
+
+        private bool IsDeleteFile()
+        {
+            if (isDelete is true) 
+            {
+                File.Delete(FilePath);
+                File.Create(FilePath).Close();
+                return true;
             }
             return false;
         }
