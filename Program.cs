@@ -43,11 +43,7 @@ do
         contact.Name = Console.ReadLine();
         Console.Write("Enter your phone: ");
         contact.Phone = Console.ReadLine();
-        bool isUpdate = contactService.UpdateContact(contact);
-        if (isUpdate)
-        {
-            Console.WriteLine("Yangilandi");
-        }
+        contactService.UpdateContact(contact);
     }
     if (command == 3)
     {
