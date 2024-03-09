@@ -11,11 +11,11 @@ namespace PhoneBook.Brokers.Storages
     internal class FileStorageBroker : IStorageBroker
     {
         private const string FilePath = "../../../Assets/Contacts.txt";
-        private bool isDelete;
+        private bool isUpdateOrDelete;
 
         public FileStorageBroker() 
         {
-            isDelete = false;
+            isUpdateOrDelete = false;
             EnsureFileExists();
         }
 
@@ -38,13 +38,13 @@ namespace PhoneBook.Brokers.Storages
 
                 if (contactProperties[2].Contains(phone))
                 {
-                    isDelete = true;
+                    isUpdateOrDelete = true;
                     contactLines[itaration] = null;
                     break;
                 }
             }
 
-            if (IsDeleteFile() is true)
+            if (IsUpdateOrDeleteFile() is true)
             {
                 for (int itaration = 0; itaration < contactLines.Length; itaration++)
                 {
@@ -90,19 +90,32 @@ namespace PhoneBook.Brokers.Storages
                 string contactLine = contactLines[itaration];
                 string[] contactProperties = contactLine.Split('*');
 
-                if (contactProperties[0].Contains(contact.Id.ToString()))
+                if (contactProperties[0].Contains(contact.Id.ToString()) is true)
                 {
                     contactProperties[1] = contact.Name;
                     contactProperties[2] = contact.Phone;
-                    return true;
+                    isUpdateOrDelete = true;
+                    break;
                 }
+            }
+
+            if (IsUpdateOrDeleteFile() is true)
+            {
+                for (int itaration = 0; itaration < contactLines.Length; itaration++)
+                {
+                    if (contactLines[itaration] is not null)
+                    {
+                        File.AppendAllText(FilePath, $"{contactLines[itaration]}\n");
+                    }
+                }
+                return true;
             }
             return false;
         }
 
-        private bool IsDeleteFile()
+        private bool IsUpdateOrDeleteFile()
         {
-            if (isDelete is true) 
+            if (isUpdateOrDelete is true) 
             {
                 File.Delete(FilePath);
                 File.Create(FilePath).Close();
