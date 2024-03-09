@@ -113,6 +113,27 @@ namespace PhoneBook.Brokers.Storages
             return false;
         }
 
+        public Contact ReadContact(string phone)
+        {
+            Contact contact = new Contact();
+            string[] contactLines = File.ReadAllLines(FilePath);
+
+            for (int itaration = 0; itaration < contactLines.Length; itaration++)
+            {
+                string contactLine = contactLines[itaration];
+                string[] contactProperties = contactLine.Split('*');
+
+                if (contactProperties[2].Contains(phone) is true)
+                {
+                    contact.Id = Convert.ToInt32(contactProperties[0]);
+                    contact.Name = contactProperties[1];
+                    contact.Phone = contactProperties[2];
+                    break;
+                }
+            }
+            return contact;
+        }
+
         private bool IsUpdateOrDeleteFile()
         {
             if (isUpdateOrDelete is true) 

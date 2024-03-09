@@ -13,6 +13,6 @@ namespace PhoneBook.Brokers.Storages
         Contact[] ReadAllContacts();
         bool DeleteContact(string phone);
         bool UpdateContact(Contact contact);
-
+        Contact ReadContact(string phone);
     }
 }

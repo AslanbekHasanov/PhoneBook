@@ -66,7 +66,9 @@ do
     }
     if (command == 5)
     {
-        Console.WriteLine("Read one phone book, Not Implemented");
+        Console.Write("Enter yuor phone(i: 111-1111-111): ");
+        string phone = Console.ReadLine();
+        contactService.ReadContact(phone);
     }
 
     Console.Write("Is your cantinue(yes / no): ");

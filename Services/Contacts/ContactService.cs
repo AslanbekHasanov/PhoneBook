@@ -54,6 +54,35 @@ namespace PhoneBook.Services.Contacts
                 : ValidateAndUpdateContact(contact);
         }
 
+        public Contact ReadContact(string phone)
+        {
+            return phone is null
+                ? ReadAndLogInvalidPhone()
+                : ValidateAndReadContact(phone);
+
+        }
+
+        private Contact ValidateAndReadContact(string phone)
+        {
+            if (string.IsNullOrWhiteSpace(phone) is true)
+            {
+                this.loggingBroker.LogError("No phone details.");
+                return new Contact();
+            }
+            else
+            {
+                Contact contact = this.storageBroker.ReadContact(phone);
+                this.loggingBroker.LogInformation($"{contact.Id}. {contact.Name} - {contact.Phone}");
+                return contact;
+            }
+        }
+
+        private Contact ReadAndLogInvalidPhone()
+        {
+            this.loggingBroker.LogError("Invalid phone.");
+            return new Contact();
+        }
+
         private bool ValidateAndUpdateContact(Contact contact)
         {
             if (contact.Id is 0
